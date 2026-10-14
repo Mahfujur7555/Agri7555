@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a polished assignment or practical notebook cover page." />
+  <title>CoverCraft — Academic Cover Page Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="CoverCraft home">
+        <span class="brand-mark">CC</span>
+        <span>CoverCraft</span>
+      </a>
+      <div class="topbar-meta">
+        <span class="status-dot"></span>
+        <span>Academic cover builder</span>
+      </div>
+    </header>
+
+    <main id="top" class="workspace">
+      <section class="intro-block">
+        <div>
+          <p class="eyebrow">01 / Compose your front page</p>
+          <h1>Make the first page<br /><em>feel considered.</em></h1>
+        </div>
+        <p class="intro-copy">Build a clean, print-ready cover for your assignment or practical notebook. Add only what you need — every field is optional.</p>
+      </section>
+
+      <div class="builder-grid">
+        <form class="editor-panel" id="coverForm">
+          <section class="form-section section-type">
+            <div class="section-heading">
+              <div><span class="section-number">01</span><h2>Document type</h2></div>
+              <span class="section-note">Choose one</span>
+            </div>
+            <div class="segmented-control" role="radiogroup" aria-label="Document type">
+              <label class="segment active"><input type="radio" name="documentType" value="An Assignment on" checked><span class="segment-icon">↗</span><span>An Assignment on</span></label>
+              <label class="segment"><input type="radio" name="documentType" value="A Practical Notebook on"><span class="segment-icon">▤</span><span>A Practical Notebook on</span></label>
+            </div>
+            <label class="field-label" for="topic">Topic / subject matter</label>
+            <input class="text-input large-input" id="topic" name="topic" type="text" placeholder="e.g. Database Management Systems" autocomplete="off" />
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <div><span class="section-number">02</span><h2>Course details</h2></div>
+              <span class="section-note">Optional</span>
+            </div>
+            <div class="field-row two-up">
+              <div><label class="field-label" for="courseCode">Course code</label><input class="text-input" id="courseCode" name="courseCode" type="text" placeholder="e.g. CSE 2201" /></div>
+              <div><label class="field-label" for="courseTitle">Course title</label><input class="text-input" id="courseTitle" name="courseTitle" type="text" placeholder="e.g. Operating Systems" /></div>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <div><span class="section-number">03</span><h2>Submitted by</h2></div>
+              <span class="section-note">All optional</span>
+            </div>
+            <div class="field-row two-up"><div><label class="field-label" for="studentName">Name</label><input class="text-input" id="studentName" name="studentName" type="text" placeholder="Your full name" /></div><div><label class="field-label" for="regNo">Registration no.</label><input class="text-input" id="regNo" name="regNo" type="text" placeholder="e.g. 2024-001" /></div></div>
+            <div class="field-row four-up"><div><label class="field-label" for="group">Group</label><input class="text-input" id="group" name="group" type="text" placeholder="A" /></div><div><label class="field-label" for="section">Section</label><input class="text-input" id="section" name="section" type="text" placeholder="1" /></div><div><label class="field-label" for="termYear">Term & year</label><input class="text-input" id="termYear" name="termYear" type="text" placeholder="Spring 2026" /></div><div><label class="field-label" for="faculty">Faculty</label><input class="text-input" id="faculty" name="faculty" type="text" placeholder="Faculty name" /></div></div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <div><span class="section-number">04</span><h2>Submitted to</h2></div>
+              <button class="text-button" id="addTeacher" type="button">+ Add teacher</button>
+            </div>
+            <div class="teacher-list" id="teacherList"></div>
+          </section>
+
+          <section class="form-section final-section">
+            <div class="section-heading">
+              <div><span class="section-number">05</span><h2>Institute identity</h2></div>
+              <span class="section-note">Optional</span>
+            </div>
+            <label class="field-label" for="instituteName">Institute name</label>
+            <input class="text-input large-input" id="instituteName" name="instituteName" type="text" placeholder="Your university or institute" />
+            <label class="field-label" for="instituteLocation">Institute location</label>
+            <input class="text-input large-input" id="instituteLocation" name="instituteLocation" type="text" placeholder="e.g. Agargaon, Dhaka - 1215" />
+            <div class="identity-upload">
+              <div class="logo-preview" id="logoPreview"><span>LOGO</span></div>
+              <div class="upload-copy"><strong>Add institute logo</strong><span>PNG, JPG or SVG · recommended 512 × 512px</span><label class="upload-button" for="logoInput">Choose file<input id="logoInput" type="file" accept="image/*" /></label></div>
+              <button class="remove-logo" id="removeLogo" type="button" aria-label="Remove logo">×</button>
+            </div>
+          </section>
+
+          <div class="editor-actions"><button class="reset-button" id="resetForm" type="button">Reset form</button><div class="action-group"><button class="download-button" id="downloadButton" type="button"><span>Download cover</span><span>↓</span></button><button class="print-button" id="printButton" type="button"><span>Print cover</span><span>↗</span></button></div></div>
+        </form>
+
+        <aside class="preview-column">
+          <div class="preview-header"><div><p class="eyebrow">Live preview</p><h2>Your cover page</h2></div><span class="a4-badge">A4 / PORTRAIT</span></div>
+          <div class="paper-wrap"><article class="cover-paper" id="coverPaper"><div class="paper-content"><div class="paper-title-block"><p class="paper-kicker" id="previewType">AN ASSIGNMENT ON</p><h3 id="previewTopic">Your topic goes here</h3><div class="paper-divider"></div><div class="paper-course" id="previewCourse"><p><strong>Course code:</strong> Course code</p><p><strong>Course title:</strong> Course title</p></div></div><div class="paper-submission"><div class="submission-block"><span class="submission-label">SUBMITTED BY</span><div class="submission-lines labeled-lines" id="previewStudent"><p><strong>Name:</strong> Your name</p><p><strong>Registration no.:</strong> Registration no.</p><p><strong>Group:</strong> Group</p><p><strong>Section:</strong> Section</p><p><strong>Term & year:</strong> Term & year</p><p><strong>Faculty:</strong> Faculty name</p></div></div><div class="submission-block"><span class="submission-label">SUBMITTED TO</span><div class="submission-lines" id="previewTeachers"><div class="teacher-preview"><p><strong>Teacher name</strong></p><p>Designation | Department</p></div></div></div></div><div class="paper-institute"><div class="paper-logo" id="paperLogo"><span>LOGO</span></div><div class="paper-institute-copy"><p id="previewInstitute">Institute name</p><p id="previewLocation">Institute location</p></div></div></div></article></div>
+          <p class="preview-tip"><span>✦</span> Your cover updates as you type. Empty fields stay quietly out of the final layout.</p>
+        </aside>
+      </div>
+    </main>
+    <footer class="site-footer"><span>CoverCraft / A simple tool for better first pages</span><span>Built for the classroom</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
