@@ -55,81 +55,18 @@ function updatePreview() {
   $('#logoPreview').innerHTML = logoMarkup;
 }
 
-async function downloadCover() {
-  const button = document.querySelector('#downloadButton');
-  const originalText = button.querySelector('span').textContent;
-
-  button.disabled = true;
-  button.querySelector('span').textContent = 'Creating PDF…';
-
-  try {
-    if (!window.html2canvas || !window.jspdf) {
-      throw new Error('PDF libraries are unavailable.');
-    }
-
-    const cover = document.querySelector('#coverPaper');
-
-    const canvas = await window.html2canvas(cover, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#fbfaf5',
-      logging: false
-    });
-
-    const { jsPDF } = window.jspdf;
-
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
-
-    const pageWidth = 210;
-    const pageHeight = 297;
-    const imageRatio = canvas.width / canvas.height;
-
-    const imageWidth = pageWidth;
-    const imageHeight = pageWidth / imageRatio;
-    const topOffset = Math.max(
-      0,
-      (pageHeight - imageHeight) / 2
-    );
-
-    pdf.addImage(
-      canvas.toDataURL('image/png'),
-      'PNG',
-      0,
-      topOffset,
-      imageWidth,
-      imageHeight,
-      undefined,
-      'FAST'
-    );
-
-    const topic =
-      document.querySelector('#topic')?.value.trim() ||
-      'academic-cover';
-
-    const fileName = topic
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
-
-    pdf.save(`${fileName || 'academic-cover'}.pdf`);
-
-  } catch (error) {
-    console.error(error);
-
-    alert(
-      'PDF generation failed. Please use Print cover and select Save as PDF.'
-    );
-
-  } finally {
-    button.disabled = false;
-    button.querySelector('span').textContent = originalText;
-  }
+function downloadCover() {
+  const cover = $('#coverPaper').outerHTML;
+  const styles = [...document.querySelectorAll('style')].map((style) => style.textContent).join('');
+  const cssUrl = new URL('styles.css', window.location.href).href;
+  const standalone = `<!doctype html><html><head><meta charset="utf-8"><title>Academic Cover</title><link rel="stylesheet" href="${cssUrl}"><style>${styles}body{background:#fff}.cover-paper{width:210mm;height:297mm;min-height:0;margin:0 auto;box-shadow:none}.paper-wrap{padding:0;background:#fff;box-shadow:none}@media print{.cover-paper{margin:0}}</style></head><body><div class="paper-wrap">${cover}</div></body></html>`;
+  const blob = new Blob([standalone], { type: 'text/html;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'academic-cover.html';
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
-
 
 $('#addTeacher').addEventListener('click', addTeacher);
 form.addEventListener('input', updatePreview);
