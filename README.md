@@ -19,6 +19,8 @@ Open `index.html` directly in a modern browser, or serve this folder with any st
 - Font choices (Times New Roman, Roboto, Arial, Georgia, Italic) and a font-size slider — plus a separate font and size control for each section (title, course, submitted by, submitted to, institute)
 - Responsive layout for smaller screens
 
+- Default institute (Gazipur Agricultural University) is used when name and logo are empty; empty fields are left out of the cover automatically (preview, PDF and print)
+
 ## Hosting (GitHub Pages / Netlify / etc.)
 
 Upload the four files as-is to the repository root. The PDF download needs internet access on the visitor's device because it loads `html2canvas` and `jsPDF` from the cdnjs CDN. If that fails, **Print** → *Save as PDF* still works.

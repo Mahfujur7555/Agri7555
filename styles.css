@@ -147,8 +147,24 @@ select.text-input{appearance:auto;cursor:pointer}
 /* ===== Per-section controls ===== */
 .section-style-title{margin-top:24px}
 .section-styles{display:grid;gap:8px}
-.sec-row{display:grid;grid-template-columns:96px minmax(0,1.2fr) minmax(0,1fr) 38px;gap:10px;align-items:center;background:var(--surface);padding:8px 10px}
+.sec-row{display:grid;grid-template-columns:96px minmax(0,1.2fr) minmax(0,1fr) 38px 46px;gap:10px;align-items:center;background:var(--surface);padding:8px 10px}
 .sec-name{font:700 11px var(--sans)}
 .sec-row .text-input{padding:8px 8px;font-size:12px}
 .sec-value{font:600 10px var(--mono);text-align:right}
 @media(max-width:560px){.sec-row{grid-template-columns:1fr 1fr;}.sec-name{grid-column:1/-1}.sec-value{display:none}}
+
+/* ===== Empty fields stay out of the layout ===== */
+[hidden]{display:none!important}
+:is(.paper-stage,.export-stage) .paper-submission.single{grid-template-columns:minmax(0,1fr)}
+.submission-lines.labeled-lines p:not(.row-name){font-weight:400}
+.submission-lines.labeled-lines p.row-name{font-weight:800}
+.submission-lines p.teacher-line{font-weight:400}
+.paper-empty-hint{position:absolute;inset:0;margin:0;display:grid;place-items:center;text-align:center;padding:0 18%;font:11px/1.6 var(--mono);color:#9aa59f;z-index:2;pointer-events:none}
+
+/* ===== Calibri + section text colour ===== */
+.cover-paper[data-font="calibri"],.cover-paper[data-font="calibri"] *{font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif!important}
+.cover-paper [data-sfont="calibri"],.cover-paper [data-sfont="calibri"] *{font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif!important;font-style:normal}
+.cover-paper [data-scolor],.cover-paper [data-scolor] *:not(.detail-separator){color:var(--sc)!important}
+.sec-color{display:flex;align-items:center;gap:4px;justify-content:flex-end}
+.sec-color-input{width:26px;height:26px;padding:0;border:1px solid #c5d0c9;background:none;cursor:pointer}
+.sec-color-reset{border:0;background:none;color:#8a958f;font-size:16px;line-height:1;cursor:pointer;padding:0 2px}
